@@ -1,0 +1,29 @@
+#Create template entry (needed before you can upload)
+POST http://localhost:4004/odata/v4/catalog/WordTemplate
+Content-Type: application/json
+
+{
+    "templateId":1,
+    "name":"Template1",
+    "filename" : "template.docx",
+    "mediaType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+}
+
+### upload word template
+PUT http://localhost:4004/odata/v4/catalog/WordTemplate(templateId=1)/content
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+
+< ./template.docx
+
+### get list of templates
+GET http://localhost:4004/odata/v4/catalog/WordTemplate
+
+
+### download template - paste it in the browser
+GET http://localhost:4004/odata/v4/catalog/WordTemplate(templateId=1)/content
+
+### download filled template with offer data - paste it in the browser
+GET http://localhost:4004/odata/v4/catalog/WordAttachments(templateId=1)/content
+
+### delete template
+DELETE http://localhost:4004/odata/v4/catalog/WordTemplate(templateId=1)
